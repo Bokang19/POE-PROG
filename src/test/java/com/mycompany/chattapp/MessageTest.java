@@ -43,3 +43,52 @@ public class MessageTest {
         Message msg = new Message("+27118693002", "Hi Mike can you join us tonight");
         assertTrue(msg.createMessageHash().contains(":"));
     }
+
+    @Test
+    public void testMessageHashIsUppercase() {
+        Message msg = new Message("+27118693002", "Hi Mike can you join us tonight");
+        String hash = msg.createMessageHash();
+        assertEquals(hash, hash.toUpperCase());
+    }
+
+    @Test
+    public void testMessageIDLength() {
+        Message msg = new Message("+27831234567", "Test");
+        assertEquals(10, msg.getMessageID().length());
+    }
+
+    @Test
+    public void testCheckMessageID() {
+        Message msg = new Message("+27831234567", "Test");
+        assertTrue(msg.checkMessageID());
+    }
+
+    @Test
+    public void testSentMessageContainsSend() {
+        Message msg = new Message("+27831234567", "Hello");
+        assertTrue(msg.SentMessage().contains("Send Message"));
+    }
+
+    @Test
+    public void testSentMessageContainsDisregard() {
+        Message msg = new Message("+27831234567", "Hello");
+        assertTrue(msg.SentMessage().contains("Disregard Message"));
+    }
+
+    @Test
+    public void testSentMessageContainsStore() {
+        Message msg = new Message("+27831234567", "Hello");
+        assertTrue(msg.SentMessage().contains("Store Message"));
+    }
+
+    @Test
+    public void testTotalMessagesStartsAtZero() {
+        assertEquals(0, Message.returnTotalMessages());
+    }
+
+    @Test
+    public void testPrintMessagesContainsID() {
+        Message msg = new Message("+27831234567", "Hello World");
+        assertTrue(msg.printMessages().contains("Message ID:"));
+    }
+}
