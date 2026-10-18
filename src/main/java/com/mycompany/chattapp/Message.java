@@ -43,3 +43,30 @@ public class Message {
         String firstTwo = messageID.substring(0, 2);
         String[] words = messageText.trim().split("\\s+");
         
+        String firstWord = words.length > 0 ? words[0].toUpperCase().replaceAll("[^A-Z]", "") : "";
+        String lastWord = words.length > 1 ? words[words.length - 1].toUpperCase().replaceAll("[^A-Z]", "") : firstWord;
+        
+        messageHash = firstTwo + ":" + (messageCounter - 1) + ":" + firstWord + lastWord;
+        return messageHash;
+    }
+
+    public String SentMessage() {
+        return "Choose an option:\n1) Send Message\n2) Disregard Message\n3) Store Message";
+    }
+
+    public String printMessages() {
+        return "Message ID: " + messageID +
+               "\nMessage Hash: " + messageHash +
+               "\nRecipient: " + recipient +
+               "\nMessage: " + messageText;
+    }
+
+    public static int returnTotalMessages() {
+        return totalMessages;
+    }
+
+    public void increaseTotal() {
+        totalMessages++;
+    }
+
+    
